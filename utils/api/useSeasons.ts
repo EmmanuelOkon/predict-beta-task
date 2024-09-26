@@ -1,0 +1,20 @@
+import SeasonsService from "@/services";
+import { useQuery } from "@tanstack/react-query";
+
+export const useSeasons = () => {
+  const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
+    queryKey: ["seasons"],
+    queryFn: () => SeasonsService.getSeasons(),
+  });
+
+  return { isLoading, data, isSuccess, isError, error, refetch };
+};
+
+export const usePublishedSeasons = (id: number) => {
+    const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
+        queryKey: ["publishedSeasons"],
+        queryFn: () => SeasonsService.getPublishedSeasons(id),
+    });
+    
+    return { isLoading, data, isSuccess, isError, error, refetch };
+}
