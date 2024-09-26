@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Icons } from "@/components/assets/icon";
-import Countdown from "@/components/shared/Timer";
+// import Countdown from "@/components/shared/Timer";
 import { Button } from "@/components/ui/button";
 import NavigationItems from "@/components/shared/NavItems";
 
