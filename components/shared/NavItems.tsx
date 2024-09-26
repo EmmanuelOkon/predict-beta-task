@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { navItems } from "@/utils/static";
 import { usePathname } from "next/navigation";
 
+import MobileNav from "./MobileNav";
+
 export const NavigationItems = () => {
   const pathname = usePathname();
 
@@ -32,6 +34,7 @@ export const NavigationItems = () => {
           </Link>
         </NavigationMenuItem>
       ))}
+      <MobileNav />
     </>
   );
 };

@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { Icons } from "@/components/assets/icon";
 // import Countdown from "@/components/shared/Timer";
 import { Button } from "@/components/ui/button";
 import NavigationItems from "@/components/shared/NavItems";
+
+import MobileNav from "@/components/shared/MobileNav";
 
 export default function DashboardLayout({
   children,
@@ -20,6 +20,7 @@ export default function DashboardLayout({
         </div>
         <div className=" hidden lg:flex items-center justify-between flex-grow md:pl-32">
           <div className="hidden lg:flex items-center justify-between">
+            {pathname}
             <div className="flex items-center xl:mr-20">
               <Icons.Clock />
               <p className="ml-4 text-white">
@@ -49,7 +50,7 @@ export default function DashboardLayout({
         </div>
         <main className="lg:hidden">
           <Button className="bg-rose hover:bg-rose/80 p-1  rounded">
-            <Icons.Hamburger />
+            <MobileNav />
           </Button>
         </main>
       </header>
@@ -68,7 +69,7 @@ export default function DashboardLayout({
                 <div>
                   <p className="sc-dkrGBB fiNZeZ text-[#212934] text-sm"></p>
                   <p className="sc-dkrGBB fiNZeZ text-[#8895A7] text-xs text-wrap max-w-[150px] text-ellipsis overflow-hidden">
-                    emmaudo27@gmail.com
+                    emmahhokon@gmail.com
                   </p>
                 </div>
               </div>
