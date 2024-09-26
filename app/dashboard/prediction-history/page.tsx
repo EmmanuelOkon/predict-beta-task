@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const PredictionHistory = (props: Props) => {
+const PredictionHistory = () => {
   return (
     <div>prediction history</div>
   )

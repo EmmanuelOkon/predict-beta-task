@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const LeaderBoard = (props: Props) => {
+const LeaderBoard = () => {
   return (
     <div>Leaderboard</div>
   )
