@@ -1,15 +1,22 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { Icons } from "@/components/assets/icon";
-// import Countdown from "@/components/shared/Timer";
+
 import { Button } from "@/components/ui/button";
 import NavigationItems from "@/components/shared/NavItems";
 
 import MobileNav from "@/components/shared/MobileNav";
+import { navItems } from "@/utils/static";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname(); // Use usePathname to get the current pathname
+  const activeRoute = navItems.find((item) => item.href === pathname);
+
   return (
     <section>
       <header className="bg-blue py-3 px-4 lg:px-8 sticky top-0 flex items-center justify-between z-[100]">
@@ -19,8 +26,10 @@ export default function DashboardLayout({
           </div>
         </div>
         <div className=" hidden lg:flex items-center justify-between flex-grow md:pl-32">
-          <div className="hidden lg:flex items-center justify-between">
-            {pathname}
+          <h1 className="text-white font-semibold text-lg">
+            {activeRoute ? activeRoute.label : "Dashboard"}
+          </h1>
+          <div className="hidden lgflex items-center justify-between">
             <div className="flex items-center xl:mr-20">
               <Icons.Clock />
               <p className="ml-4 text-white">
@@ -30,7 +39,7 @@ export default function DashboardLayout({
             <div className="h-10">
               <div className="flex">
                 <div>timer</div>
-                {/* <Countdown /> */}
+
                 <div className="ml-1"></div>
                 <div className="ml-1"></div>
                 <div className="ml-1"></div>
@@ -55,7 +64,6 @@ export default function DashboardLayout({
         </main>
       </header>
       <main className="flex w-screen items-start">
-        {/* Sidebar */}
         <aside className="sidebar flex-shrink-0 bg-white w-1/5 top-[80px] sticky pt-2.5 pb-10 hidden lg:flex flex-col">
           <div className="flex flex-col flex-grow justify-between px-3">
             <div>
@@ -80,8 +88,7 @@ export default function DashboardLayout({
           </div>
         </aside>
 
-        {/* Main content */}
-        <main className="flex-1 overflow-y-auto p-5">{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </main>
     </section>
   );
