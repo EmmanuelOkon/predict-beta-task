@@ -7,7 +7,7 @@ export interface ISeasons {
   year: number;
 }
 
-export interface IPublishedSeasons {
+export interface IPublishedWeeks {
   id: number;
   createdAt: Date;
   deletedAt: null;
@@ -34,4 +34,3 @@ export interface INavItem {
   active?: boolean;
   href: string;
 }
-

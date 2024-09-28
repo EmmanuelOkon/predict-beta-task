@@ -1,16 +1,17 @@
 "use client";
 
 import React from "react";
-import { usePublishedSeasons } from "@/utils/api/useSeasons";
-import { IPublishedSeasons } from "@/utils/api/types";
+import { usePublishedWeeks } from "@/utils/api/useSeasons";
+import { IPublishedWeeks } from "@/utils/api/types";
 import { Icons } from "../assets/icon";
 
 interface Props {
-  id: number | undefined
+  id: number | undefined;
 }
 
 const Published = ({ id }: Props) => {
-  const { data, isLoading, isError } = usePublishedSeasons(id as number);
+  const { data, isLoading, isError } = usePublishedWeeks(id as number);
+
   return (
     <>
       {isLoading ? (
@@ -24,7 +25,7 @@ const Published = ({ id }: Props) => {
       ) : (
         <div>
           <div className="bg-red-400 w-1/2">
-            {data?.data?.map((season: IPublishedSeasons) => (
+            {data?.data?.map((season: IPublishedWeeks) => (
               <div key={season.id}>
                 <h2>{season.publish}</h2>
                 <p> ID:{season.id} </p>

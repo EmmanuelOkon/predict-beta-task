@@ -10,10 +10,10 @@ export const usePlayers = () => {
   return { isLoading, data, isSuccess, isError, error, refetch };
 };
 
-export const usePublishedSeasons = (id: number) => {
+export const usePublishedWeeks = (id: number) => {
   const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
     queryKey: ["publishedSeasons"],
-    queryFn: () => GetAllServices.getPublishedSeasons(id),
+    queryFn: () => GetAllServices.getPublishedWeeks(id),
   });
 
   return { isLoading, data, isSuccess, isError, error, refetch };

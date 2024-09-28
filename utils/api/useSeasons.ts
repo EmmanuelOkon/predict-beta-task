@@ -10,10 +10,10 @@ export const useSeasons = () => {
   return { isLoading, data, isSuccess, isError, error, refetch };
 };
 
-export const usePublishedSeasons = (id: number) => {
+export const usePublishedWeeks = (id: number) => {
   const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
-    queryKey: ["publishedSeasons", id],
-    queryFn: () => GetAllServices.getPublishedSeasons(id),
+    queryKey: ["published", id],
+    queryFn: () => GetAllServices.getPublishedWeeks(id),
     enabled: !!id,
   });
 
@@ -21,13 +21,13 @@ export const usePublishedSeasons = (id: number) => {
 };
 
 //  GET /fixtures/season/{seasonId}/week/{weekId}
-
-export const useWeeklyFixtures = (id: number) => {
+export const useWeeksFixtures = (seasonId: number, weekId: number) => {
   const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
-    queryKey: ["weeklyFixtures", id],
-    queryFn: () => GetAllServices.getWeeklyFixtures(id),
-    enabled: !!id,
+    queryKey: ["weeklyFixtures", seasonId, weekId],
+    queryFn: () => GetAllServices.getWeeksFixtures(seasonId, weekId),
+    enabled: !!seasonId && !!weekId,
   });
 
   return { isLoading, data, isSuccess, isError, error, refetch };
 };
+
