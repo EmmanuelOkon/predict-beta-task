@@ -94,6 +94,8 @@ Create a new file in the root of your application .env.local and insert the BASE
 NEXT_PUBLIC_API_BASE_URL=https://predict-beta-api-develop-hpcmx2pcya-uc.a.run.app/
 ```
 
+Start your app locally by running the code below on your terminal
+
 ```bash
 npm run dev
 ```
