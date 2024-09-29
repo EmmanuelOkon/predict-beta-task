@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "@/utils/api";
-import { IPublishedWeeks, ISeasons } from "@/utils/api/types";
+import { IPredictionsPayload, IPublishedWeeks, ISeasons } from "@/utils/api/types";
 import { IFixtures } from "@/utils/api/fixturesTypes";
 
 class GetAllServices {
@@ -8,6 +8,7 @@ class GetAllServices {
   private static PUBLISHED_SEASONS_API_BASE = "/weeks/season/";
   private static WEEKLY_FIXTURES_API_BASE = "/fixtures/season/";
   private static HEAD_TO_HEAD_API_BASE = "/fixtures/";
+  private static PREDICTIONS_API_BASE = "/predictions";
 
   // GET = /seasons
   public static async getSeasons() {
@@ -46,25 +47,24 @@ class GetAllServices {
 
     return data;
   }
+
+  // Submit Predictions
+  // POST = /predictions
+  public static async submitPredictions(predictions: IPredictionsPayload) {
+    const { data } = await axiosInstance.post<AxiosResponse<IPredictionsPayload>>(
+      `${this.PREDICTIONS_API_BASE}`,
+      predictions
+    );
+
+    return data;
+  }
 }
 
-// Get Head-to-Head for a Match
-// GET = /fixtures/{fixtureId}/h2h
+
 
 // Submit Predictions
 // POST = /predictions
 
+
 export default GetAllServices;
 
-// class playersService {
-//   private static PLAYERS_API_BASE = "/players";
-
-//   // GET = /players
-//   public static async getPlayers() {
-//     const { data } = await axiosInstance.get<AxiosResponse<ISeasons[]>>(
-//       `${this.PLAYERS_API_BASE}`
-//     );
-
-//     return data;
-//   }
-// }

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import SeasonsWrapper from "@/components/pages/seasons";
-import Published from "@/components/pages/published";
+// import Published from "@/components/pages/published";
 
 const AllSeasons = () => {
   const [id, setId] = React.useState<number | undefined>();
@@ -10,7 +10,7 @@ const AllSeasons = () => {
   return (
     <>
       <SeasonsWrapper setId={setId} id={id} />
-      <Published id={id} />
+      {/* <Published id={id} /> */}
     </>
   );
 };

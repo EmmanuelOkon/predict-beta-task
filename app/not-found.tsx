@@ -11,7 +11,6 @@ export default function Error({
 }) {
   const router = useRouter();
   React.useEffect(() => {
-    
     console.error(error);
   }, [error]);
 
@@ -24,10 +23,7 @@ export default function Error({
       </p>
       <Button
         className="bg-rose hover:bg-rose/90 text-lg font-normal p-4"
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => router.push("/")
-        }
+        onClick={() => router.push("/")}
       >
         Take a ride home
       </Button>
