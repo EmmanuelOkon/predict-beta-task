@@ -7,7 +7,7 @@ export interface ISeasons {
   year: number;
 }
 
-export interface IPublishedSeasons {
+export interface IPublishedWeeks {
   id: number;
   createdAt: Date;
   deletedAt: null;
@@ -24,8 +24,13 @@ export interface IMatchCard {
 }
 
 export interface ISelection {
-  type: "H" | "A";
+  type: "H" | "A" | "D";
   team: string;
+}
+
+export interface IPredictionsPayload {
+  fixtureId: number;
+  result: string;
 }
 
 export interface INavItem {

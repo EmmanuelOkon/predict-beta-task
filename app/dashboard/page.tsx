@@ -1,8 +1,7 @@
 import React from "react";
 
-type Props = {};
 
-const Fixtures = (props: Props) => {
+const Fixtures = () => {
   return <div>fixtures home page</div>;
 };
 
