@@ -72,52 +72,28 @@ const MatchCard: React.FC<MatchCardProps> = ({
                 <div>
                   <div className="grid grid-cols-3 w-fit ml-auto gap-[2px] ">
                     <Toggle
-                      className={`px-4 py-2 rounded-s-md flex items-center justify-center cursor-pointer ${
-                        prediction === "HOME" ? "bg-blue" : "bg-gray-200"
+                      className={`px-4 py-2 flex hover:text-blue items-center justify-center cursor-pointer ${
+                        prediction === "HOME" ? "bg-rose" : "bg-blue"
                       }`}
                       onClick={() => onPrediction(fixture.id, "H")}
                     >
-                      <p
-                        className={
-                          prediction === "HOME"
-                            ? "text-white"
-                            : "text-[#5F6B7A]"
-                        }
-                      >
-                        H
-                      </p>
+                      <p className="text-white hover:text-blue">H</p>
                     </Toggle>
                     <Toggle
-                      className={`px-4 py-2 flex items-center justify-center cursor-pointer ${
-                        prediction === "DRAW" ? "bg-blue" : "bg-gray-200"
+                      className={`px-4 py-2 flex hover:text-blue items-center justify-center cursor-pointer ${
+                        prediction === "DRAW" ? "bg-rose" : "bg-blue"
                       }`}
                       onClick={() => onPrediction(fixture.id, "X")}
                     >
-                      <p
-                        className={
-                          prediction === "DRAW"
-                            ? "text-white"
-                            : "text-[#5F6B7A]"
-                        }
-                      >
-                        X
-                      </p>
+                      <p className="text-white hover:text-blue">X</p>
                     </Toggle>
                     <Toggle
-                      className={`px-4 py-2 rounded-e-md flex items-center justify-center cursor-pointer ${
-                        prediction === "AWAY" ? "bg-blue" : "bg-gray-200"
+                      className={`px-4 py-2 flex hover:text-blue items-center justify-center cursor-pointer ${
+                        prediction === "AWAY" ? "bg-rose" : "bg-blue"
                       }`}
                       onClick={() => onPrediction(fixture.id, "A")}
                     >
-                      <p
-                        className={
-                          prediction === "AWAY"
-                            ? "text-white"
-                            : "text-[#5F6B7A]"
-                        }
-                      >
-                        A
-                      </p>
+                      <p className="text-white hover:text-blue">A</p>
                     </Toggle>
                   </div>
                 </div>

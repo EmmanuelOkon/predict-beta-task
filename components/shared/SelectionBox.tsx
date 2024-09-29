@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 
 import * as React from "react";
-
-// import { IPredictionsPayload } from "@/utils/api/types";
 import { Icons } from "../assets/icon";
-
 import { Separator } from "../ui/separator";
 import { Datum } from "@/utils/api/fixturesTypes";
 import { Prediction } from "./MatchCard";
+import { useSubmitPredictions } from "@/utils/api/useSeasons";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 interface MatchCardProps {
   data: Datum[];
@@ -15,14 +15,34 @@ interface MatchCardProps {
 }
 
 const SelectionBox: React.FC<MatchCardProps> = ({ data, predictions }) => {
-  if (!data || data.length === 0) {
-    console.log("No fixtures to display");
-    return <p className="text-center text-rose ">No fixtures available</p>;
-  }
+  const { mutate, isPending, isSuccess, isError, error } =
+    useSubmitPredictions();
+
+  const handleSubmitPredictions = () => {
+    if (predictions.length !== data.length) {
+      return toast.warning("Please predict all fixtures");
+    }
+    if (predictions.length > 0) {
+      mutate(predictions);
+    }
+  };
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      toast.success("Predictions submitted successfully!");
+    }
+    if (isError && error) {
+      toast.error(`Error submitting predictions: ${error.message}`);
+    }
+  }, [isSuccess, isError, error]);
 
   const getPredictionForFixture = (fixtureId: number) => {
     return predictions.find((p) => p.fixtureId === fixtureId)?.result;
   };
+
+  if (!data || data.length === 0) {
+    return <p className="text-center text-rose ">No fixtures available</p>;
+  }
 
   return (
     <div className="hidden lg:block md:w-1/3 md:pl-8">
@@ -69,7 +89,7 @@ const SelectionBox: React.FC<MatchCardProps> = ({ data, predictions }) => {
                 </div>
                 <div className="flex flex-col items-center">
                   <p className="sc-dkrGBB fiNZeZ text-center text-[#8895A7] text-xs font-light">
-                    {prediction || "N/A"}
+                    {prediction || ""}
                   </p>
                 </div>
               </div>
@@ -78,12 +98,14 @@ const SelectionBox: React.FC<MatchCardProps> = ({ data, predictions }) => {
         </div>
         <div className="mt-6 px-4">
           <Separator />
-          <button
-            type="submit"
+          <Button
+            type="button"
+            onClick={handleSubmitPredictions}
+            disabled={isPending}
             className=" bg-rose cursor-pointer py-2 px-4 flex justify-center items-center text-white text-center rounded-sm w-full"
           >
             <span>Submit your prediction </span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

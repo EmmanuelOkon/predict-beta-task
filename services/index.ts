@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "@/utils/api";
-import { IPredictionsPayload, IPublishedWeeks, ISeasons } from "@/utils/api/types";
+import { IPublishedWeeks, ISeasons } from "@/utils/api/types";
 import { IFixtures } from "@/utils/api/fixturesTypes";
 
 class GetAllServices {
@@ -50,8 +50,8 @@ class GetAllServices {
 
   // Submit Predictions
   // POST = /predictions
-  public static async submitPredictions(predictions: IPredictionsPayload) {
-    const { data } = await axiosInstance.post<AxiosResponse<IPredictionsPayload>>(
+  public static async submitPredictions(predictions: {fixtureId: number; result:string}[]) {
+    const { data } = await axiosInstance.post(
       `${this.PREDICTIONS_API_BASE}`,
       predictions
     );
@@ -59,11 +59,6 @@ class GetAllServices {
     return data;
   }
 }
-
-
-
-// Submit Predictions
-// POST = /predictions
 
 
 export default GetAllServices;

@@ -1,5 +1,5 @@
 import GetAllServices from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useSeasons = () => {
   const { isLoading, data, isSuccess, isError, error, refetch } = useQuery({
@@ -31,3 +31,12 @@ export const useWeeksFixtures = (seasonId: number, weekId: number) => {
   return { isLoading, data, isSuccess, isError, error, refetch };
 };
 
+export const useSubmitPredictions = () => {
+  const { mutate, isPending, isSuccess, isError, error } = useMutation({
+    mutationFn: (predictions: { fixtureId: number; result: string }[]) => {
+      return GetAllServices.submitPredictions(predictions);
+    },
+  });
+
+  return { mutate, isPending, isSuccess, isError, error };
+};

@@ -3,10 +3,7 @@
 
 import * as React from "react";
 import { useSeasons, useWeeksFixtures } from "@/utils/api/useSeasons";
-import {
-  IPublishedWeeks,
-  ISeasons,
-} from "@/utils/api/types";
+import { IPublishedWeeks, ISeasons } from "@/utils/api/types";
 import { Icons } from "../assets/icon";
 
 import {
@@ -15,7 +12,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  
 } from "@/components/ui/select";
 import SelectionBox from "../shared/SelectionBox";
 import { Separator } from "../ui/separator";
@@ -41,8 +37,9 @@ const SeasonsWrapper = ({ setId, id }: Props) => {
     isError: weeksIsError,
   } = usePublishedWeeks(id as number);
   const [selectedWeek, setSelectedWeek] = React.useState<number | undefined>(
-    undefined
+    31
   );
+
   const [predictions, setPredictions] = React.useState<Prediction[]>([]);
 
   const handlePrediction = (fixtureId: number, prediction: "H" | "X" | "A") => {
@@ -54,18 +51,16 @@ const SeasonsWrapper = ({ setId, id }: Props) => {
         (p) => p.fixtureId === fixtureId
       );
       if (existingPredictionIndex > -1) {
-        
         const newPredictions = [...prev];
         newPredictions[existingPredictionIndex] = { fixtureId, result };
         return newPredictions;
       } else {
-        
         return [...prev, { fixtureId, result }];
       }
     });
   };
 
-  console.log("Predictions:", predictions);
+  console.log(predictions);
 
   const {
     data: fixturesData,
@@ -82,6 +77,21 @@ const SeasonsWrapper = ({ setId, id }: Props) => {
     }
   }, [data]);
 
+  React.useEffect(() => {
+    if (data?.data && data.data.length > 0) {
+      const currentSeason = data.data.find((season) => season.isCurrent);
+      if (currentSeason) {
+        setId(currentSeason.id);
+      }
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    if (selectedWeek) {
+      setPredictions([]);
+    }
+  }, [selectedWeek]);
+
   return (
     <>
       <section className="seasonsHeader bg-white w-full px-4 lg:px-8 py-3 flx items-center justify-between">
@@ -97,7 +107,7 @@ const SeasonsWrapper = ({ setId, id }: Props) => {
               <SelectContent>
                 {data?.data?.map((season: ISeasons) => (
                   <SelectItem value={season.id.toString()} key={season.id}>
-                    {season.year}{" "}
+                    {season.name}{" "}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -123,7 +133,7 @@ const SeasonsWrapper = ({ setId, id }: Props) => {
                 ) : (
                   weeksData?.data?.map((week: IPublishedWeeks) => (
                     <SelectItem value={week.id.toString()} key={week.id}>
-                      {week.number}
+                      {week.id}
                     </SelectItem>
                   ))
                 )}
